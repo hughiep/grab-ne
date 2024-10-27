@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   ChevronLeft,
@@ -18,8 +20,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
-export default function Component() {
+export default function Checkout() {
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("card");
 
   return (
@@ -145,7 +149,10 @@ export default function Component() {
 
       {/* Place Order Button */}
       <div className="p-4 bg-white border-t">
-        <Button className="w-full bg-green-500 hover:bg-green-600 text-white text-lg h-14 rounded-lg">
+        <Button
+          onClick={() => router.push("/pick-driver")}
+          className="w-full bg-green-500 hover:bg-green-600 text-white text-lg h-14 rounded-lg"
+        >
           <span>Place Order - $19.97</span>
           <ChevronRight className="h-5 w-5 ml-2" />
         </Button>

@@ -5,8 +5,10 @@ import { ChevronLeft, Search, ShoppingCart, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useRouter } from "next/navigation";
 
 export default function Component() {
+  const router = useRouter();
   const [cartTotal, setCartTotal] = useState(0);
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -140,7 +142,12 @@ export default function Component() {
             <p className="text-sm text-gray-600">Your Order</p>
             <p className="font-semibold">${cartTotal.toFixed(2)}</p>
           </div>
-          <Button className="bg-green-500 hover:bg-green-600 text-white">
+          <Button
+            onClick={() => {
+              router.push("/checkout");
+            }}
+            className="bg-green-500 hover:bg-green-600 text-white"
+          >
             <ShoppingCart className="h-4 w-4 mr-2" />
             View Cart
           </Button>
