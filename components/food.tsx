@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Component() {
   const router = useRouter();
@@ -41,10 +42,12 @@ export default function Component() {
       <main className="flex-grow overflow-y-auto">
         {/* Restaurant Logo */}
         <div className="w-full h-24 bg-white flex items-center justify-center">
-          <img
+          <Image
             src="/placeholder.svg?height=96&width=96"
             alt="Pizza Palace Logo"
-            className="h-16 w-16 rounded-full object-cover"
+            width={64}
+            height={64}
+            className="rounded-full object-cover"
           />
         </div>
 

@@ -6,8 +6,14 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useGeoLocation } from '@/hooks/use-geo-location'
-import Map from './map'
+import dynamic from 'next/dynamic'
 import { useSyncLocation } from '@/hooks/use-sync-location'
+
+// Dynamically import Map component to prevent SSR issues
+const Map = dynamic(() => import('./map'), {
+	ssr: false,
+	loading: () => <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">Loading map...</div>
+})
 
 export default function DriverWaiting() {
 	useSyncLocation()
@@ -41,7 +47,7 @@ export default function DriverWaiting() {
 				{/* Status */}
 				<div className="bg-white p-6 rounded-lg shadow text-center">
 					<h2 className="text-2xl font-bold mb-2">
-						{isOnline ? "You're Online" : "You're Offline"}
+						{isOnline ? "You&apos;re Online" : "You&apos;re Offline"}
 					</h2>
 					<p className="text-gray-600">
 						{isOnline
@@ -62,7 +68,7 @@ export default function DriverWaiting() {
 				<div className="grid grid-cols-2 gap-4">
 					<div className="bg-white p-4 rounded-lg shadow text-center">
 						<DollarSign className="h-8 w-8 text-green-500 mx-auto mb-2" />
-						<h3 className="font-semibold">Today's Earnings</h3>
+						<h3 className="font-semibold">Today&apos;s Earnings</h3>
 						<p className="text-xl font-bold">$85.50</p>
 					</div>
 					<div className="bg-white p-4 rounded-lg shadow text-center">

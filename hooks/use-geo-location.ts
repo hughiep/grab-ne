@@ -6,6 +6,11 @@ export const useGeoLocation = () => {
 	console.log({ location, error })
 
 	useEffect(() => {
+		// Check if we're on the client side
+		if (typeof window === 'undefined') {
+			return
+		}
+
 		if (!navigator.geolocation) {
 			setError('Geolocation is not supported by your browser')
 			return

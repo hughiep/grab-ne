@@ -3,6 +3,7 @@ import { Search, Home, Receipt, User, MapPin, Star, Clock } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import Image from 'next/image'
 
 export default function HomeScreen() {
 	return (
@@ -52,9 +53,11 @@ export default function HomeScreen() {
 								key={i}
 								className="bg-white rounded-lg shadow overflow-hidden"
 							>
-								<img
+								<Image
 									src={`/placeholder.svg?height=100&width=200`}
 									alt="Restaurant"
+									width={200}
+									height={96}
 									className="w-full h-24 object-cover"
 								/>
 								<div className="p-2">
@@ -80,9 +83,11 @@ export default function HomeScreen() {
 								key={i}
 								className="bg-white rounded-lg shadow p-3 flex items-center"
 							>
-								<img
+								<Image
 									src={`/placeholder.svg?height=50&width=50`}
 									alt="Restaurant"
+									width={48}
+									height={48}
 									className="w-12 h-12 rounded-full object-cover mr-3"
 								/>
 								<div className="flex-grow">

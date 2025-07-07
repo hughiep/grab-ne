@@ -14,6 +14,11 @@ export default function Socket({ children }: { children: React.ReactNode }) {
 	const [isConnected, setIsConnected] = useState(false)
 
 	useEffect(() => {
+		// Only run on client side
+		if (typeof window === 'undefined') {
+			return
+		}
+
 		socket.connect()
 
 		return () => {
@@ -22,6 +27,11 @@ export default function Socket({ children }: { children: React.ReactNode }) {
 	}, [])
 
 	useEffect(() => {
+		// Only run on client side
+		if (typeof window === 'undefined') {
+			return
+		}
+
 		const onConnect = () => {
 			setIsConnected(true)
 		}

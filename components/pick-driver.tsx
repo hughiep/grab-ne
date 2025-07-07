@@ -1,41 +1,59 @@
 'use client'
 
-import 'leaflet/dist/leaflet.css'
-
 import React, { useState, useEffect } from 'react'
 import { Phone, MessageSquare, MapPin, Clock, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-
-import L from 'leaflet'
 
 export default function PickDriver() {
 	const [driverAssigned, setDriverAssigned] = useState(false)
 	const [searchProgress, setSearchProgress] = useState(0)
 
 	useEffect(() => {
-		const map = L.map('map', {
-			center: L.latLng(49.2125578, 16.62662018),
-			zoom: 14,
-		})
+		// Only run on client side
+		if (typeof window === 'undefined') {
+			return
+		}
 
-		const key = 'Tp6qzLXagp3MXlO1ZnCk'
+		let map: any = null
 
-		L.tileLayer(
-			`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${key}`,
-			{
-				//style URL
-				tileSize: 512,
-				zoomOffset: -1,
-				minZoom: 1,
-				attribution:
-					'\u003ca href="https://www.maptiler.com/copyright/" target="_blank"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href="https://www.openstreetmap.org/copyright" target="_blank"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e',
-				crossOrigin: true,
-			},
-		).addTo(map)
+		const initializeMap = async () => {
+			// Dynamically import Leaflet
+			const L = await import('leaflet')
+
+			// Dynamically add Leaflet CSS
+			const leafletCss = document.createElement('link')
+			leafletCss.rel = 'stylesheet'
+			leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+			document.head.appendChild(leafletCss)
+
+			map = L.map('map', {
+				center: L.latLng(49.2125578, 16.62662018),
+				zoom: 14,
+			})
+
+			const key = 'Tp6qzLXagp3MXlO1ZnCk'
+
+			L.tileLayer(
+				`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${key}`,
+				{
+					//style URL
+					tileSize: 512,
+					zoomOffset: -1,
+					minZoom: 1,
+					attribution:
+						'\u003ca href="https://www.maptiler.com/copyright/" target="_blank"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href="https://www.openstreetmap.org/copyright" target="_blank"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e',
+					crossOrigin: true,
+				},
+			).addTo(map)
+		}
+
+		initializeMap()
 
 		return () => {
-			map.remove()
+			if (map) {
+				map.remove()
+			}
 		}
 	}, [])
 

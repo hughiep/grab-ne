@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Component() {
   const router = useRouter();
@@ -112,9 +113,11 @@ export default function Component() {
                 key={item.id}
                 className="bg-white p-4 rounded-lg shadow flex"
               >
-                <img
+                <Image
                   src={item.image}
                   alt={item.name}
+                  width={96}
+                  height={96}
                   className="w-24 h-24 object-cover rounded-md mr-4"
                 />
                 <div className="flex-grow">
