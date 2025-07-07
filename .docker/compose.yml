@@ -6,4 +6,4 @@ services:
       dockerfile: .docker/Dockerfile
     container_name: app
     ports:
-      - "80:80" # map port 80 in container (nginx) to 80 in host machine
+      - "8000:80" # map port 80 in container (nginx) to 80 in host machine
