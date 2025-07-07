@@ -1,0 +1,9 @@
+services:
+  app:
+    image: app # Custom image name
+    build:
+      context: ../ # Use the parent directory as the build context
+      dockerfile: .docker/Dockerfile
+    container_name: app
+    ports:
+      - "80:80" # map port 80 in container (nginx) to 80 in host machine
