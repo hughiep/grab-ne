@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    image: fe-grab-ne
+    container_name: fe-grab-ne
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    ports:
+      - "8080:3000"
+    restart: always
